@@ -1,21 +1,8 @@
 import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
 
-const uploadDir = 'uploads';
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
-}
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, uploadDir);
-    },
-    filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-        cb(null, uniqueSuffix + path.extname(file.originalname));
-    },
-});
+// Use memory storage for serverless environments (Vercel)
+// Files will be stored in memory as Buffer, then uploaded to Supabase
+const storage = multer.memoryStorage();
 
 const fileFilter = (req: any, file: any, cb: any) => {
     if (file.mimetype.startsWith('image/')) {
@@ -28,7 +15,7 @@ const fileFilter = (req: any, file: any, cb: any) => {
 export const upload = multer({
     storage: storage,
     limits: {
-        fileSize: 1024 * 1024 * 5, // 5MB limit (backend safety)
+        fileSize: 1024 * 1024 * 5, // 5MB limit
     },
     fileFilter: fileFilter,
 });

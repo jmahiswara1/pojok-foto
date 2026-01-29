@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import prisma from '../config/database';
+import { uploadToSupabase } from '../services/storage.service';
 
 interface AuthRequest extends Request {
     user?: any;
@@ -64,12 +65,13 @@ export const updateAvatar = async (req: AuthRequest, res: Response) => {
         }
 
         const userId = req.user.id;
-        // Construct full URL
-        const profilePic = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+
+        // Upload to Supabase
+        const profilePicUrl = await uploadToSupabase(req.file, 'avatars');
 
         const updatedUser = await prisma.user.update({
             where: { id: userId },
-            data: { profilePic },
+            data: { profilePic: profilePicUrl },
         });
 
         res.json({ message: 'Avatar updated', user: updatedUser });
