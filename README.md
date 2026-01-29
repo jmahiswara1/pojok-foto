@@ -1,24 +1,22 @@
-# 📸 Pojok Foto
+# Pojok Foto
 
 **Pojok Foto** is a modern, web-based photo booth application built with a distinctive **Neobrutalist** design aesthetic. It allows users to capture moments, choose creative layouts, apply filters, and customize their photos with frames—all directly in the browser.
 
-![Pojok Foto Preview](frontend/public/preview-porto.png)
+## Key Features
 
-## ✨ Key Features
-
-- **📸 Real-time Camera Capture**: Zero-latency webcam integration.
-- **🎨 Creative Layouts**: Various photo grid layouts (Strip, 2x2, etc.).
-- **🖼️ Powerful Editor**:
+- **Real-time Camera Capture**: Zero-latency webcam integration.
+- **Creative Layouts**: Various photo grid layouts (Strip, 2x2, etc.).
+- **Powerful Editor**:
   - **Filters**: Grayscale, Sepia, Retro, and more.
   - **Frames**: Custom Neobrutalist frame overlays.
   - **Slot Management**: Upload specific photos to specific slots or delete them individually.
-- **💾 Gallery System**:
+- **Gallery System**:
   - Save projects to specific albums.
   - View layout history.
-- **🛠️ Neobrutalist UI**: Bold borders, high contrast, and raw aesthetic using Tailwind CSS.
-- **📱 Responsive**: Optimized for Desktop and Mobile web.
+- **Neobrutalist UI**: Bold borders, high contrast, and raw aesthetic using Tailwind CSS.
+- **Responsive**: Optimized for Desktop and Mobile web.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 - **Framework**: Next.js 14 (App Router)
@@ -128,8 +126,7 @@ pojok-foto/
 └── README.md         # Documentation
 ```
 
-## 🤝 Contributing
-Contributions are welcome! Please check the `implementation_plan.md` for current roadmap items.
+---
 
-## 📄 License
-MIT License.
+Dibuat oleh Gadang Mahiswara
+https://jmahiswara.vercel.app/
