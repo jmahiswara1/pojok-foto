@@ -119,7 +119,7 @@ export default function HomePage() {
             </Link>
 
             {/* Card 3: Editor */}
-            <Link href="/editor" className="group h-full">
+            <Link href="/layout-selection" className="group h-full">
               <div className="h-full bg-white border-3 border-black p-8 shadow-[8px_8px_0px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[10px_10px_0px_0px_#000] transition-all duration-300 flex flex-col">
                 <div className="w-16 h-16 bg-[#DEDEDE] border-3 border-black flex items-center justify-center mb-8 group-hover:bg-white transition-colors">
                   <Wand2 className="w-8 h-8 text-black" />
