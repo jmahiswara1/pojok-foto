@@ -13,6 +13,7 @@
         "@prisma/client": "^5.22.0",
         "@supabase/supabase-js": "^2.93.3",
         "@types/multer": "^2.0.0",
+        "@types/uuid": "^9.0.8",
         "bcrypt": "^6.0.0",
         "cors": "^2.8.5",
         "dotenv": "^16.4.5",
@@ -23,8 +24,7 @@
         "multer": "^2.0.2",
         "nodemailer": "^7.0.13",
         "passport": "^0.7.0",
-        "passport-google-oauth20": "^2.0.0",
-        "uuid": "^13.0.0"
+        "passport-google-oauth20": "^2.0.0"
     },
     "devDependencies": {
         "@types/bcrypt": "^6.0.0",
