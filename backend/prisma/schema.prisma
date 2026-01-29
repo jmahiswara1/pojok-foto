@@ -1,0 +1,191 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ==================== ENUMS ====================
+
+enum AssetType {
+  FRAME
+  FILTER
+  STICKER
+  TEMPLATE
+}
+
+enum PhotoShape {
+  SQUARE
+  CIRCLE
+  HEART
+  ROUNDED_SQUARE
+  HEXAGON
+  STAR
+}
+
+enum FilterType {
+  NONE
+  GRAYSCALE
+  SEPIA
+  BRIGHTNESS
+  CONTRAST
+  BLUR
+  VINTAGE
+  COOL
+  WARM
+}
+
+// ==================== MAIN MODELS ====================
+
+model User {
+  id               String         @id @default(uuid())
+  email            String         @unique
+  username         String?        @unique
+  name             String?
+  password         String?        // Hashed password, null if using Google auth initially
+  googleId         String?        // Unique ID from Google
+  profilePic       String?
+  resetToken       String?        @unique
+  resetTokenExpiry DateTime?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  photos           Photo[]
+  photoProjects    PhotoProject[]
+}
+
+model Photo {
+  id        String   @id @default(uuid())
+  url       String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  frameId   String?
+  filterId  String?
+  metadata  Json?    // Flexible metadata (width, height, size, format, etc.)
+  createdAt DateTime @default(now())
+
+  frame     Asset?   @relation("PhotoFrame", fields: [frameId], references: [id])
+  filter    Asset?   @relation("PhotoFilter", fields: [filterId], references: [id])
+}
+
+model Category {
+  id           Int            @id @default(autoincrement())
+  name         String         @unique
+  iconUrl      String?
+
+  assets       Asset[]
+  frameLayouts FrameLayout[]
+}
+
+model Asset {
+  id         String      @id @default(uuid())
+  name       String
+  type       AssetType
+  url        String
+  thumbnail  String?
+  isPremium  Boolean     @default(false)
+  categoryId Int?
+  colorHex   String?     // For solid color frames
+  patternUrl String?     // For pattern/texture frames
+  metadata   Json?       // Additional data
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  category         Category?       @relation(fields: [categoryId], references: [id])
+  photoProjects    PhotoProject[]  @relation("FrameAsset")
+  projectStickers  ProjectSticker[]
+  framePhotos      Photo[]         @relation("PhotoFrame")
+  filterPhotos     Photo[]         @relation("PhotoFilter")
+
+  @@index([type])
+  @@index([categoryId])
+}
+
+// ==================== PHOTOSTRIP EDITOR MODELS ====================
+
+model FrameLayout {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  thumbnailUrl String?
+  holesConfig Json     // Array of {top, left, width, height} in percent
+  photoCount  Int
+  aspectRatio String
+  isPremium   Boolean  @default(false)
+  categoryId  Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  category      Category?      @relation(fields: [categoryId], references: [id])
+  photoProjects PhotoProject[]
+
+  @@index([categoryId])
+}
+
+model PhotoProject {
+  id                   String      @id @default(uuid())
+  userId               String
+  frameLayoutId        String
+  frameAssetId         String?     // Frame overlay image (PNG transparent)
+  backgroundColor      String?     // Hex color
+  backgroundPatternUrl String?     // Pattern URL
+  filterType           FilterType  @default(NONE)
+  filterIntensity      Decimal     @default(1.00) @db.Decimal(3, 2)
+  photoShape           PhotoShape  @default(SQUARE)
+  metadata             Json?
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
+
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  frameLayout    FrameLayout      @relation(fields: [frameLayoutId], references: [id], onDelete: Restrict)
+  frameAsset     Asset?           @relation("FrameAsset", fields: [frameAssetId], references: [id])
+  projectPhotos  ProjectPhoto[]
+  projectStickers ProjectSticker[]
+  projectTexts   ProjectText[]
+
+  @@index([userId])
+  @@index([frameLayoutId])
+}
+
+model ProjectPhoto {
+  id            String   @id @default(uuid())
+  projectId     String
+  photoUrl      String
+  slotIndex     Int      // Index in holesConfig (0-based)
+  cropData      Json?    // {x, y, width, height, zoom}
+  transformData Json?    // {rotation, flipH, flipV}
+  createdAt     DateTime @default(now())
+
+  project PhotoProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+}
+
+model ProjectSticker {
+  id             String   @id @default(uuid())
+  projectId      String
+  stickerAssetId String
+  position       Json     // {x, y, width, height, rotation, zIndex}
+  createdAt      DateTime @default(now())
+
+  project      PhotoProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  stickerAsset Asset        @relation(fields: [stickerAssetId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+}
+
+model ProjectText {
+  id        String   @id @default(uuid())
+  projectId String
+  content   String
+  position  Json     // {x, y, fontSize, fontFamily, color, rotation}
+  style     Json?    // {bold, italic, underline, shadow, outline}
+  createdAt DateTime @default(now())
+
+  project PhotoProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+}
