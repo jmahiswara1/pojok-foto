@@ -38,7 +38,7 @@ export default function LayoutSelectionPage() {
 
     const fetchLayouts = async () => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/frame-layouts`);
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/frame-layouts`);
             const data = await response.json();
 
             if (data.success) {

@@ -101,7 +101,7 @@ function EditorContent() {
                     if (!token) return; // Wait for auth or handle redirect
 
                     const API_URL = process.env.NEXT_PUBLIC_API_URL;
-                    const res = await fetch(`${API_URL}/api/photo-projects/${projectId}`, {
+                    const res = await fetch(`${API_URL}/photo-projects/${projectId}`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
                     const data = await res.json();
@@ -158,14 +158,14 @@ function EditorContent() {
             const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
             // Fetch frame assets (colors and overlays)
-            const framesRes = await fetch(`${API_URL}/api/assets?type=FRAME`);
+            const framesRes = await fetch(`${API_URL}/assets?type=FRAME`);
             const framesData = await framesRes.json();
             if (framesData.success) {
                 setFrameAssets(framesData.data);
             }
 
             // Fetch stickers
-            const stickersRes = await fetch(`${API_URL}/api/assets?type=STICKER`);
+            const stickersRes = await fetch(`${API_URL}/assets?type=STICKER`);
             const stickersData = await stickersRes.json();
             if (stickersData.success) {
                 setStickerAssets(stickersData.data);
@@ -230,7 +230,7 @@ function EditorContent() {
             };
 
             const API_URL = process.env.NEXT_PUBLIC_API_URL;
-            const res = await fetch(`${API_URL}/api/photo-projects`, {
+            const res = await fetch(`${API_URL}/photo-projects`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

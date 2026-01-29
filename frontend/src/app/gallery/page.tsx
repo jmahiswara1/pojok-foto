@@ -84,7 +84,7 @@ export default function GalleryPage() {
         try {
             const token = auth.getToken();
             const API_URL = process.env.NEXT_PUBLIC_API_URL;
-            const res = await fetch(`${API_URL}/api/photo-projects`, {
+            const res = await fetch(`${API_URL}/photo-projects`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await res.json();
@@ -112,7 +112,7 @@ export default function GalleryPage() {
         try {
             const token = auth.getToken();
             const API_URL = process.env.NEXT_PUBLIC_API_URL;
-            const res = await fetch(`${API_URL}/api/photo-projects/${projectToDelete}`, {
+            const res = await fetch(`${API_URL}/photo-projects/${projectToDelete}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });

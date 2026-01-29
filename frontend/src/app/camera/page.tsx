@@ -76,7 +76,7 @@ export default function CameraPage() {
         const fetchLayoutFromDB = async () => {
             try {
                 const API_URL = process.env.NEXT_PUBLIC_API_URL;
-                const res = await fetch(`${API_URL}/api/frame-layouts`);
+                const res = await fetch(`${API_URL}/frame-layouts`);
                 const data = await res.json();
 
                 if (data.success && Array.isArray(data.data)) {
