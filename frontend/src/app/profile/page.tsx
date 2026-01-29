@@ -49,7 +49,7 @@ export default function ProfilePage() {
 
             try {
                 // Fetch fresh user data from backend
-                const response = await fetch('http://localhost:5000/api/auth/me', {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -106,7 +106,7 @@ export default function ProfilePage() {
 
         try {
             const token = auth.getToken();
-            const response = await fetch('http://localhost:5000/api/user/avatar', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/avatar`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -166,7 +166,7 @@ export default function ProfilePage() {
             // User has password - send email verification
             try {
                 const token = auth.getToken();
-                const response = await fetch('http://localhost:5000/api/auth/request-change-password', {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/request-change-password`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -196,7 +196,7 @@ export default function ProfilePage() {
 
             try {
                 const token = auth.getToken();
-                const response = await fetch('http://localhost:5000/api/auth/set-password', {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/set-password`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,

@@ -7,7 +7,7 @@ export interface User {
     hasPassword?: boolean;
 }
 
-const API_URL = 'http://localhost:5000/api/auth';
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/auth`;
 const USER_STORAGE_KEY = 'pojok-foto-user';
 const TOKEN_STORAGE_KEY = 'pojok-foto-token';
 
