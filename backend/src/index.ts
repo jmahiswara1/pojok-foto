@@ -35,7 +35,11 @@ app.get('/', (req: Request, res: Response) => {
     res.send('Pojok Foto Backend API is running');
 });
 
-// Start server
-app.listen(port, () => {
-    console.log(`[server]: Server is running at http://localhost:${port}`);
-});
+// Start server if not in Vercel environment
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(port, () => {
+        console.log(`[server]: Server is running at http://localhost:${port}`);
+    });
+}
+
+export default app;
