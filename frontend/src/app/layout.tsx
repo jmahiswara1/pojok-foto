@@ -18,7 +18,10 @@ export const metadata: Metadata = {
   description: "Photobooth Online dengan beragam frame dan filter",
   icons: {
     icon: "/logo.png",
-  }
+  },
+  verification: {
+    google: "vBD7dA_25AEL5bq4i7BOe4r4LiJC4LcgwrbZUERSlTg",
+  },
 };
 
 export default function RootLayout({
