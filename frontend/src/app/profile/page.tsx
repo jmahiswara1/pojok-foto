@@ -81,8 +81,8 @@ export default function ProfilePage() {
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-            if (file.size > 1024 * 1024) { // 1MB limit
-                setAvatarError('Image size matches 1MB limit.');
+            if (file.size > 5 * 1024 * 1024) { // 5MB limit
+                setAvatarError('Image size exceeds 5MB limit.');
                 return;
             }
             setAvatarError('');
@@ -282,7 +282,7 @@ export default function ProfilePage() {
                                         Change Avatar
                                     </Button>
                                     <p className="text-xs font-bold text-neutral-500 uppercase">
-                                        JPG or PNG. Max size 1MB
+                                        JPG or PNG. Max size 5MB
                                     </p>
                                     {avatarError && <p className="text-xs font-bold text-red-500">{avatarError}</p>}
                                 </div>
