@@ -152,14 +152,14 @@ export default function HomePage() {
 
             <div className="lg:col-span-2 space-y-8 text-lg md:text-xl text-justify font-medium leading-relaxed">
               <p>
-                PojokFoto is a passion project envisioned and built by <HoverCard openDelay={200}>
+                PojokFoto started as a small passion project by <HoverCard openDelay={200}>
                   <HoverCardTrigger asChild>
-                    <a href="https://jmahiswara.vercel.app" target="_blank" className="relative group inline-block font-black underline decoration-4 underline-offset-4 decoration-black hover:bg-black hover:text-white hover:decoration-white transition-colors cursor-pointer px-1">
+                    <a href="https://gadangmahiswara.vercel.app" target="_blank" className="relative group inline-block font-black underline decoration-4 underline-offset-4 decoration-black hover:bg-black hover:text-white hover:decoration-white transition-colors cursor-pointer px-1">
                       GADANG MAHISWARA
                     </a>
                   </HoverCardTrigger>
                   <HoverCardContent className="w-80 bg-white border-3 border-black shadow-[8px_8px_0px_0px_#000] p-2 rotate-2 rounded-none z-[999]" side="top">
-                    <a href="https://jmahiswara.vercel.app" target="_blank" className="block cursor-pointer">
+                    <a href="https://gadangmahiswara.vercel.app" target="_blank" className="block cursor-pointer">
                       <div className="relative w-full aspect-video h-44 border-2 border-black bg-neutral-200">
                         <Image
                           src="/preview-porto.png"
@@ -172,10 +172,13 @@ export default function HomePage() {
                       <span className="block mt-2 text-center text-xs font-bold uppercase tracking-widest bg-black text-white py-1">Visit Portfolio ↗</span>
                     </a>
                   </HoverCardContent>
-                </HoverCard>, a developer dedicated to blending nostalgic experiences with modern web technology. Driven by the idea that every digital corner should have a space for joy, I created this platform as an accessible, "no-nonsense" virtual studio. My goal was to strip away the complexity of traditional apps and offer a bold, Neo-Brutalist environment where users can express their rawest, most authentic selves with just a single click.
+                </HoverCard>, built from a simple idea. I noticed my girlfriend wanted an easy, aesthetic way to capture our moments together, without the clutter and complexity of typical photo apps.
               </p>
               <p>
-                This platform is more than just a camera tool; it is a digital sanctuary for your memories. Whether you are here to snap a quick solo profile picture or to capture a chaotic group session with friends, PojokFoto is designed to be your reliable companion. I believe that technology should be transparent and fun, which is why I've focused on creating a seamless, browser-based experience that honors the classic "photo strip" tradition while pushing the boundaries of what a modern web app can be.
+                From that thought, PojokFoto was born a no-nonsense virtual photo studio with a bold Neo-Brutalist design. A space where you don’t have to overthink anything—just be yourself, press one button, and capture the moment. Simple, honest, and designed to feel human.
+              </p>
+              <p>
+                For me, this platform is more than just a camera tool, it’s a digital place for your favorite memories. Whether you’re grabbing a quick solo shot or having a chaotic session with friends, I wanted to make sure it felt seamless and fun.
               </p>
             </div>
           </div>

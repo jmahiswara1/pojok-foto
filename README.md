@@ -129,4 +129,4 @@ pojok-foto/
 ---
 
 Dibuat oleh Gadang Mahiswara
-https://jmahiswara.vercel.app/
+https://gadangmahiswara.vercel.app/
