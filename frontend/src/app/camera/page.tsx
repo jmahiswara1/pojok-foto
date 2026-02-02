@@ -207,9 +207,9 @@ export default function CameraPage() {
     return (
         <div className="h-[calc(100vh-88px)] bg-[#FAFAFA] flex flex-col overflow-hidden">
             {/* Main Content */}
-            <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+            <div className="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0">
                 {/* Camera Preview - Left */}
-                <div className="flex-1 bg-[#DEDEDE] flex items-center justify-center p-4 lg:p-8 relative">
+                <div className="flex-1 min-h-0 bg-[#DEDEDE] flex items-center justify-center p-2 lg:p-8 relative">
                     {/* Back Button */}
                     <button
                         onClick={() => router.push('/layout-selection')}
@@ -355,8 +355,8 @@ export default function CameraPage() {
                     )}
                 </div>
 
-                {/* Photo Grid - Right */}
-                <div className="w-full lg:w-80 xl:w-96 bg-white border-t-3 lg:border-t-0 lg:border-l-3 border-black flex flex-col overflow-hidden">
+                {/* Photo Grid - Right (Hidden on mobile when camera is active) */}
+                <div className={`w-full lg:w-80 xl:w-96 bg-white border-t-3 lg:border-t-0 lg:border-l-3 border-black flex flex-col overflow-hidden ${state.isActive && state.isReady ? 'hidden lg:flex' : 'flex'}`}>
                     {/* Scrollable Content */}
                     <div className="flex-1 overflow-y-auto p-4">
                         {/* Progress */}
@@ -426,6 +426,33 @@ export default function CameraPage() {
                     )}
                 </div>
             </div>
+
+            {/* Mobile Photo Counter & Proceed Button - Fixed above bottom controls */}
+            {state.isActive && state.isReady && (
+                <div className="lg:hidden p-3 bg-white border-t-3 border-black z-20 flex items-center gap-3">
+                    {/* Photo Counter */}
+                    <div className="flex items-center gap-2 bg-gray-100 px-3 py-2 border-2 border-black">
+                        <span className="font-black text-lg">{capturedPhotos.length}/{frameLayout.photoCount}</span>
+                        <span className="text-xs text-gray-500 uppercase">Photos</span>
+                    </div>
+
+                    {/* Proceed Button - Only show when complete */}
+                    {isComplete ? (
+                        <Button
+                            variant="black"
+                            fullWidth
+                            onClick={handleProceedToEditor}
+                            className="flex-1"
+                        >
+                            Proceed to Editor →
+                        </Button>
+                    ) : (
+                        <div className="flex-1 text-center text-sm text-gray-500">
+                            Capture {frameLayout.photoCount - capturedPhotos.length} more
+                        </div>
+                    )}
+                </div>
+            )}
 
             {/* Bottom Controls */}
             {state.isActive && state.isReady && (
