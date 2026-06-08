@@ -10,8 +10,8 @@
 :root {
   /* Neobrutalism Color Palette */
   --black-void: #000000;
-  --ash-gray: #B8B8B8;
-  --misty-gray: #C3C3C3;
+  --ash-gray: #595959;
+  --misty-gray: #8C8C8C;
   --smoke-gray: #DEDEDE;
   --whisper-white: #FAFAFA;
 
@@ -19,7 +19,7 @@
   --surface: #FFFFFF;
   --border: oklch(0.922 0 0);
   --text-primary: #000000;
-  --text-secondary: #B8B8B8;
+  --text-secondary: #595959;
 
   /* Neobrutalism Shadow */
   --shadow-brutal: 6px 6px 0px #000000;
@@ -32,7 +32,7 @@
 
   /* Spacing */
   --spacing-unit: 0.25rem;
-  --radius: 0.625rem;
+  --radius: 0px;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -103,13 +103,27 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   --color-foreground: var(--foreground);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --radius-base: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+  
+  /* Typography Tokens */
+  --font-size-h1: clamp(2.5rem, 5vw, 4rem);
+  --font-size-h2: clamp(2rem, 4vw, 3rem);
+  --font-size-h3: clamp(1.5rem, 3vw, 2rem);
+  
+  /* Shadow Tokens (Neobrutalism) */
+  --shadow-sm: 4px 4px 0px var(--color-black);
+  --shadow-md: 6px 6px 0px var(--color-black);
+  --shadow-lg: 8px 8px 0px var(--color-black);
+  --shadow-xl: 8px 8px 0px var(--color-black);
+  --shadow-2xl: 8px 8px 0px var(--color-black);
+  --shadow-shadow: 6px 6px 0px var(--color-black);
 }
 
 /* =============================================
@@ -305,16 +319,16 @@ h6 {
 }
 
 h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: var(--font-size-h1);
   letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: var(--font-size-h2);
 }
 
 h3 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: var(--font-size-h3);
 }
 
 p {
