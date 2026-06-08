@@ -166,7 +166,6 @@ export default function HomePage() {
                           alt="Portfolio Preview"
                           fill
                           className="object-cover"
-                          unoptimized
                         />
                       </div>
                       <span className="block mt-2 text-center text-xs font-bold uppercase tracking-widest bg-black text-white py-1">Visit Portfolio ↗</span>
