@@ -11,18 +11,20 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "text-primary-foreground bg-primary border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+          "text-primary-foreground bg-primary border-2 border-black shadow-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
         noShadow: "text-primary-foreground bg-primary border-2 border-black",
         neutral:
-          "bg-secondary text-secondary-foreground border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+          "bg-secondary text-secondary-foreground border-2 border-black shadow-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
         reverse:
-          "text-primary-foreground bg-primary border-2 border-black hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]",
+          "text-primary-foreground bg-primary border-2 border-black hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-sm",
         outline:
           "bg-white border-2 border-black text-black hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none hover:bg-neutral-100",
         black:
-          "bg-black text-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+          "bg-black text-white border-2 border-black shadow-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none hover:bg-neutral-900",
         white:
-          "bg-white text-black border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
+          "bg-white text-black border-2 border-black shadow-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none hover:bg-neutral-100",
+        ash:
+          "bg-[#595959] text-white border-2 border-black shadow-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none hover:bg-[#4D4D4D]",
       },
       size: {
         default: "h-10 px-4 py-2",

@@ -2,21 +2,43 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  hover?: boolean
-  padding?: "none" | "sm" | "md" | "lg"
-}
+import { cva, type VariantProps } from "class-variance-authority"
+
+const cardVariants = cva(
+  "border-3 border-black shadow-md",
+  {
+    variants: {
+      variant: {
+        white: "bg-white text-black",
+        black: "bg-black text-white",
+        ash: "bg-[#595959] text-white",
+      },
+      padding: {
+        none: "p-0",
+        sm: "p-4",
+        md: "p-6",
+        lg: "p-8",
+      },
+      hover: {
+        true: "transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:translate-x-[2px] active:translate-y-[2px]",
+        false: "",
+      }
+    },
+    defaultVariants: {
+      variant: "white",
+      padding: "md",
+      hover: false,
+    }
+  }
+)
+
+interface CardProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {}
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, hover, padding, ...props }, ref) => (
+  ({ className, variant, padding, hover, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn(
-        "bg-card text-card-foreground border-3 border-black shadow-[6px_6px_0px_0px_#000]",
-        padding === "none" ? "p-0" : "p-6",
-        hover && "transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none",
-        className
-      )}
+      className={cn(cardVariants({ variant, padding, hover, className }))}
       {...props}
     />
   )

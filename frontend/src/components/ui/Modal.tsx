@@ -10,6 +10,7 @@ interface ModalProps {
     children: ReactNode;
     size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
     showCloseButton?: boolean;
+    variant?: 'white' | 'black' | 'ash';
 }
 
 export function Modal({
@@ -19,6 +20,7 @@ export function Modal({
     children,
     size = 'md',
     showCloseButton = true,
+    variant = 'white',
 }: ModalProps) {
     useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
@@ -46,6 +48,12 @@ export function Modal({
         full: 'max-w-[95vw] h-[95vh]',
     };
 
+    const variantStyles = {
+        white: 'bg-white text-black',
+        black: 'bg-black text-white',
+        ash: 'bg-[#595959] text-white',
+    };
+
     return (
         <div className="fixed inset-0 z-50 overflow-auto">
             {/* Backdrop */}
@@ -57,7 +65,7 @@ export function Modal({
             {/* Modal */}
             <div className="flex min-h-screen items-center justify-center p-4">
                 <div
-                    className={`relative w-full ${sizes[size]} bg-white dark:bg-gray-900 rounded-3xl shadow-2xl animate-in zoom-in-95 fade-in duration-200`}
+                    className={`relative w-full ${sizes[size]} ${variantStyles[variant]} border-3 border-black shadow-lg animate-in zoom-in-95 fade-in duration-200`}
                     onClick={(e) => e.stopPropagation()}
                 >
                     {/* Header */}
@@ -71,10 +79,10 @@ export function Modal({
                             {showCloseButton && (
                                 <button
                                     onClick={onClose}
-                                    className="ml-auto p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                                    className="ml-auto p-2 bg-white text-black border-2 border-black shadow-sm hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
                                     aria-label="Close modal"
                                 >
-                                    <X className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+                                    <X className="w-5 h-5" />
                                 </button>
                             )}
                         </div>

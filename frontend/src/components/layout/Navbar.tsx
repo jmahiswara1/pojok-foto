@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { LogIn, Menu, X, User as UserIcon, Image as ImageIcon, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
@@ -20,6 +21,7 @@ export function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [user, setUser] = useState<User | null>(null);
     const [mounted, setMounted] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         setMounted(true);
@@ -29,7 +31,7 @@ export function Navbar() {
     const handleLogout = () => {
         auth.logout();
         setUser(null);
-        window.location.href = '/';
+        router.push('/');
     };
 
     const navLinks = [
@@ -39,9 +41,27 @@ export function Navbar() {
     ];
 
     if (!mounted) return (
-        <nav className="brutal-navbar h-[88px] flex items-center">
+        <nav className="brutal-navbar h-[88px] flex items-center z-50 relative bg-white">
             <div className="brutal-container w-full">
-                {/* Skeleton or static navbar to prevent hydration mismatch */}
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                        <div className="flex items-baseline gap-1">
+                            <span className="text-3xl font-black tracking-tighter leading-none">POJOK</span>
+                            <span className="text-3xl font-black tracking-tighter leading-none text-white" style={{ WebkitTextStroke: '1px black' }}>FOTO</span>
+                        </div>
+                    </div>
+                    <div className="hidden md:flex items-center gap-6">
+                        {navLinks.map((link) => (
+                            <div key={link.href} className="text-sm font-bold uppercase tracking-wide px-4 py-2 text-transparent bg-gray-200 animate-pulse">
+                                {link.label}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="hidden md:block">
+                        <div className="w-10 h-10 border-2 border-black bg-gray-200 animate-pulse rounded-full" />
+                    </div>
+                    <div className="md:hidden w-10 h-10 border-2 border-black bg-gray-200 animate-pulse" />
+                </div>
             </div>
         </nav>
     );
