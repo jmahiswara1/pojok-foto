@@ -15,6 +15,7 @@ import { auth } from '@/lib/auth';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
 import { BrutalCard as Card } from '@/components/ui/Card';
+import { useToast } from '@/components/ui';
 import { LoadingScreen } from '@/components/shared/LoadingScreen';
 import { toPng } from 'html-to-image';
 import { saveAs } from 'file-saver';
@@ -63,6 +64,7 @@ interface Project {
 
 export default function GalleryPage() {
     const router = useRouter();
+    const { toast } = useToast();
     const [projects, setProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
     const [dataReady, setDataReady] = useState(false);
@@ -126,11 +128,11 @@ export default function GalleryPage() {
                     setSelectedProject(null);
                 }
             } else {
-                alert('Failed to delete project');
+                toast('Error', 'Failed to delete project', 'error');
             }
         } catch (error) {
             console.error('Delete error:', error);
-            alert('Error deleting project');
+            toast('Error', 'Error deleting project', 'error');
         }
     };
 
@@ -142,7 +144,7 @@ export default function GalleryPage() {
                 saveAs(dataUrl, `pojok-foto-${project.createdAt}.png`);
             } catch (err) {
                 console.error('Download failed', err);
-                alert('Failed to download image');
+                toast('Error', 'Failed to download image', 'error');
             }
         }
     };

@@ -21,6 +21,7 @@ import { HexAlphaColorPicker, HexColorInput } from 'react-colorful';
 import { toPng } from 'html-to-image';
 import { saveAs } from 'file-saver';
 import { Button } from '@/components/ui/Button';
+import { useToast } from '@/components/ui';
 import { LoadingScreen } from '@/components/shared/LoadingScreen';
 import { auth } from '@/lib/auth';
 
@@ -58,6 +59,7 @@ type PhotoShape = 'SQUARE' | 'CIRCLE' | 'HEART' | 'ROUNDED_SQUARE';
 
 function EditorContent() {
     const router = useRouter();
+    const { toast } = useToast();
 
     const [frameLayout, setFrameLayout] = useState<FrameLayout | null>(null);
     const [photos, setPhotos] = useState<string[]>([]);
@@ -207,7 +209,7 @@ function EditorContent() {
         try {
             const token = auth.getToken();
             if (!token) {
-                alert('Please login to save projects');
+                toast('Info', 'Please login to save projects', 'info');
                 router.push('/login');
                 return;
             }
@@ -242,13 +244,13 @@ function EditorContent() {
             const data = await res.json();
 
             if (data.success) {
-                alert('Project saved to gallery!');
+                toast('Success', 'Project saved to gallery!', 'success');
             } else {
                 throw new Error(data.message || 'Failed to save');
             }
         } catch (error) {
             console.error('Save error:', error);
-            alert('Failed to save project');
+            toast('Error', 'Failed to save project', 'error');
         } finally {
             setIsSavingFinished(true); // Signal completion animation
         }
@@ -272,7 +274,7 @@ function EditorContent() {
             saveAs(dataUrl, `pojok-foto-${Date.now()}.png`);
         } catch (err) {
             console.error('Download failed:', err);
-            alert('Failed to generate image');
+            toast('Error', 'Failed to generate image', 'error');
         } finally {
             setIsSavingFinished(true); // Signal completion animation
         }
